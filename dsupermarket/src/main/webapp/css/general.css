@@ -1,0 +1,99 @@
+
+body{
+
+background-color: #E4E4F1;
+}
+/*按钮样式*/
+.buStyle{
+	width:70px;
+	height:25px;
+	font-weight:bold;
+	font-size:14px;
+	color:white;
+	background:url(../images/select.jpg) no-repeat;
+	background-size:70px 25px;	
+	border:0px;
+	cursor:pointer;
+	}
+
+/*go按钮样式*/
+#go{
+	width:30px;
+	height:20px;
+	background:url(../images/select.jpg) no-repeat;
+	background-size:30px 20px;
+	border:0px;
+	cursor:pointer;
+	font-weight:bold;
+	color:white;
+	
+	}
+	
+/*查询层*/
+#selectDiv{
+	font-size:14px;
+}	
+/*输入框样式*/
+.textStyle{
+	width:100px;
+	}
+
+li{
+	list-style:none;
+	float:left;
+	}
+#pageDir{
+	text-align:center;
+	margin:0 auto;
+	}
+/*输入框、按钮样式*/
+.tebu{
+	width:30px;
+	height:20px;
+	}
+	/*
+img{
+	width:24px;
+	height:24px;
+	cursor:pointer;
+	}
+	*/
+/*超链接样式*/
+a:link{
+	color:blue;
+	text-decoration:none;
+	}
+a:hover{
+	color:red;
+	text-decoration:none;
+	}
+/*显示列表样式*/
+	.ta tr th{
+			background:#66f94c;
+			color:green;
+			line-height:30px;
+			text-align:center;
+			border-collapse:collapse;
+			border:1px solid green;
+	}
+	.ta{
+		border-collapse:collapse;
+		border:1px solid green;
+		text-align:center;
+		width:80%;
+	}
+	.ta tr td{
+		border-collapse:collapse;
+		border:1px solid green;
+		padding:5 5 5 5;
+	}
+	
+	.mousehover{background:#3381CB;}
+	
+	.tabletop{
+	font-weight:bold;
+	font-size:30px;
+	color: #2557BA; 
+	font-family: 微软雅黑
+	
+	}
