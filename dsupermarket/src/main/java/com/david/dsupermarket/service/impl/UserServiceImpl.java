@@ -18,7 +18,7 @@ import com.david.dsupermarket.service.UserService;
 @Service(value="userService")
 public class UserServiceImpl implements UserService {
 
-	@Resource(name="userDao")
+	@Resource
 	private UserDao userDao;
 	/**
 	 * 根据用户名查找用户
@@ -33,6 +33,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void addUser(User user) {
 		userDao.addUser(user);
+	}
+	/**
+	 * 更新用户信息
+	 */
+	@Override
+	public void updateUser(User user) {
+		userDao.updateUser(user);
 	}
 
 }

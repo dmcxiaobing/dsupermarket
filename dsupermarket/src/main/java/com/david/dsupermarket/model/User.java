@@ -20,7 +20,9 @@ public class User {
 	private Date createDate;
 	// 用户的状态，1,表示可用。0表示不可用
 	private Integer state;
-
+	//判断是否是管理员，1是管理员，0是普通用户
+	private Integer role;
+	
 	public Integer getUid() {
 		return uid;
 	}
@@ -64,8 +66,18 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", createDate=" + createDate
-				+ ", state=" + state + "]";
+				+ ", state=" + state + ", role=" + role + "]";
 	}
 
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
+	
+	
 	
 }

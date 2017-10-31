@@ -78,7 +78,7 @@
 			<br />
 			<br />
 			<!--<c:set var="stu" value="${sessionScope.stu_info }"/>-->
-			<form action="${path }/user/addUser.action" target="mainFrame">
+			<form action="${path }/user/addUserAdmin.action" target="mainFrame">
 				<table class="ta" width="200px">
 					<tr>
 						<td>
@@ -86,7 +86,7 @@
 						</td>
 						<td>
 							<input type="text" name="username"  id="username"  placeholder="请输入用户名" value="${user.username }"
-								onblur="checkusername(this,'/user/checkUsernameIsExists.action')" />
+								onblur="checkusername(this,'${path}/user/checkUsernameIsExists.action')" />
 
 						</td>
 						<td>

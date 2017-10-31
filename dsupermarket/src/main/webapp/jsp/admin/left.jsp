@@ -138,7 +138,7 @@ response.setCharacterEncoding("utf-8");
                   <TBODY>
                    
                     <TR>
-                      <TD height=20><a href="EmployerAction!emplyerList" target="mainFrame">员工列表</a></TD>
+                      <TD height=20><a href="${pageContext.request.contextPath}/employer/list.action" target="mainFrame">员工列表</a></TD>
                     </TR>
                     <TR>
                       <TD height=20><a href="add_employer.jsp" target="mainFrame">添加员工</a></TD>
@@ -337,7 +337,7 @@ response.setCharacterEncoding("utf-8");
             <TABLE cellSpacing=0 cellPadding=0 width=135 align=center>
               <TBODY>
               <TR>
-                <TD height=20 bgcolor="#D6DFF7" style="LINE-HEIGHT: 150%">版权:滨州学院计算机	系
+                <TD height=20 bgcolor="#D6DFF7" style="LINE-HEIGHT: 150%">版权:David	
                  </TD>
               </TR></TBODY></TABLE></DIV></TD></TR></TBODY></TABLE></TR></TBODY></TABLE>
 

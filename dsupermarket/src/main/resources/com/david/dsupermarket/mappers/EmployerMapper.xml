@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 员工操作 -->
+<mapper namespace="com.david.dsupermarket.dao.EmployerDao">
+	<resultMap type="Employer" id="EmployerResult">
+		<result property="eid" column="eid" />
+		<result property="ename" column="ename" />
+		<result property="address" column="address" />
+		<result property="telephone" column="telephone" />
+		<result property="monthpay" column="monthpay" />
+	</resultMap>
+
+	<!-- 查找所有员工。 -->
+	<select id="list" resultType="Employer">
+		select * from tb_employer
+	</select>
+		<!-- 插入员工 -->
+	<insert id="addEmployer" parameterType="Employer">
+		insert into tb_employer
+		values(null,#{ename},#{address},#{telephone},#{monthpay})
+	</insert>
+	
+	<!-- 删除员工 -->
+	<delete id="deleteEmployer" parameterType="Integer">
+		delete  from tb_employer where eid=#{eid}
+	</delete>
+	<!-- 根据员工id查找员工信息 -->
+	<select id="findEmployerByEid" parameterType="Integer" resultMap="EmployerResult">
+		select * from tb_employer where eid=#{eid}
+	</select>
+</mapper>

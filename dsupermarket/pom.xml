@@ -239,7 +239,7 @@
 
 	<!-- 配置构建jdk版本以及tomcat,maven版本 -->
 	<build>
-		<finalName>emd_blog</finalName>
+		<finalName>dsupermarket</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

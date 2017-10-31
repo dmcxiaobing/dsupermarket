@@ -20,5 +20,9 @@ public interface UserDao {
 	 * @param user 要添加的用户实体
 	 */
 	public void addUser(User user);
+	/**
+	 * 修改，更新用户信息
+	 */
+	public void updateUser(User user);
 
 }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 博主信息 -->
+<!-- 用户操作 -->
 <mapper namespace="com.david.dsupermarket.dao.UserDao">
-	 <resultMap type="User" id="UserResult">
+	<resultMap type="User" id="UserResult">
 		<result property="uid" column="uid" />
 		<result property="username" column="username" />
 		<result property="password" column="password" />
@@ -13,37 +13,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<!-- 根据用户名查找用户。 -->
-	<select id="findUserByUsername" parameterType="String" resultMap="UserResult">
+	<select id="findUserByUsername" parameterType="String"
+		resultType="User">
 		select * from tb_user where username=#{username}
 	</select>
 	<!-- 插入用户 -->
-	<insert id="addUser" parameterMap="UserResult" >
-		insert into tb_user where
+	<insert id="addUser" parameterType="User">
+		insert into tb_user
+		values(null,#{username},#{password},now(),#{state},#{role})
 	</insert>
-	<!--<select id="find" resultMap="BloggerResult">
-		select * from t_blogger where id=1;
-	</select>
-	
-	更新blogger信息
-	<update id="update" parameterType="Blogger">
-		update t_blogger
+	<!-- 更新用户的信息 -->
+	<update id="updateUser" parameterType="User">
+		update tb_user
 		<set>
+			<if test="username!=null and username!=''">
+				username=#{username},
+			</if>
 			<if test="password!=null and password!=''">
 				password=#{password},
 			</if>
-			<if test="nickName!=null and nickName!=''">
-				nickName=#{nickName},
+			<if test="state!=null and state!=''">
+				state=#{state},
 			</if>
-			<if test="sign!=null and sign!=''">
-				sign=#{sign},
-			</if>
-			<if test="proFile!=null and proFile!=''">
-				proFile=#{proFile},
-			</if>
-			<if test="imageName!=null and imageName!=''">
-				imageName=#{imageName},
+			<if test="role!=null and role!=''">
+				role=#{role},
 			</if>
 		</set>
-		where id=1
-	</update> -->
+		<if test="uid!=null and uid!=''">
+			where uid=#{uid}
+		</if>
+	</update>
+
+	<!--<select id="find" resultMap="BloggerResult"> select * from t_blogger 
+		where id=1; </select> -->
 </mapper>

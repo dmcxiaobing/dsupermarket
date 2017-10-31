@@ -24,11 +24,20 @@
  -->
 
 	<!-- 配置视图解析器 作用:在controller中指定页面路径的时候就不用写页面的完整路径名称了,可以直接写页面去掉扩展名的名称 -->
-	<bean id="viewResolver"
+ 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/admin/" />
-		<property name="suffix" value=".jsp"></property>
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="0" />
 	</bean>
+	<bean id="viewResolver1"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="1" />
+		
+	</bean>
+	
 	<!-- 配置文件上传 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -37,4 +46,18 @@
 		<property name="maxUploadSize" value="5242880" />
 	</bean>
 
+
+ <!-- 	<bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <property name="basename">
+            <value>spring-views</value>
+        </property>
+        <property name="order" value="0" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="location">
+            <value>/WEB-INF/spring-views.xml</value>
+        </property>
+        <property name="order" value="1" />
+    </bean> -->
 </beans>  

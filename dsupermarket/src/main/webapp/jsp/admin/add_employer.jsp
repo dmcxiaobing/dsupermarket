@@ -26,28 +26,25 @@
 	<body>
 		<center><font class="tabletop">添加员工</font></center><br/><br/>
 		<!--<c:set var="stu" value="${sessionScope.stu_info }"/>-->
-		<form action="EmployerAction!addEmployer" target="mainFrame" >
+		<form action="${path }/employer/addEmployer.action" target="mainFrame"  method="post">
 		<table class="ta" width="200px">	
+		
 		<tr >
-			<td>用户名</td>
-			<td><input type="text" name="employer.username" /></td>
-		</tr>
-		<tr >
-			<td>密码</td>
-			<td><input type="password" name="employer.password" />
+			<td>员工姓名</td>
+			<td><input type="text" name="ename" />
 			</td>
 		</tr>
 		<tr >
-			<td>家庭住址</td>
-			<td><input type="text" name="employer.adress" /></td>
+			<td>员工地址</td>
+			<td><input type="text" name="address" /></td>
 		</tr>
 		<tr >
-			<td>电话</td>
-			<td><input type="text" name="employer.telephone" /></td>
+			<td>员工电话</td>
+			<td><input type="text" name="telephone" /></td>
 		</tr>
 		<tr >
-			<td>月薪</td>
-			<td><input type="text" name="employer.monthpay" /></td>
+			<td>员工月薪</td>
+			<td><input type="text" name="monthpay" /></td>
 		</tr>
 		
 		<tr>

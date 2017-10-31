@@ -20,8 +20,10 @@ import com.david.dsupermarket.utils.LogUtils;
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
+ * 这个认证失败，也有可能是mapper.xml配置文件写错导致 。数据库的数据是否正确
+ *  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
  */
-public class MyRealm extends AuthorizingRealm{
+ public class MyRealm extends AuthorizingRealm{
 
 	@Resource(name="userService")
 	private UserService userService;
@@ -30,7 +32,6 @@ public class MyRealm extends AuthorizingRealm{
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	/**
@@ -40,13 +41,14 @@ public class MyRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// 向下转型
 		String username = (String) token.getPrincipal();
+		//查找所有用户
 		User dbUser = userService.findUserByUsername(username);
-		if (dbUser!=null) {
+		if (dbUser!=null && dbUser.getRole()==1) {
 			// 证明用户名正确，数据库存在用户信息。
 			SecurityUtils.getSubject().getSession().setAttribute(Constants.SESSION_CURRENT_USER_INFO, dbUser);
 			AuthenticationInfo info = new SimpleAuthenticationInfo(dbUser.getUsername(),
 					dbUser.getPassword(),dbUser.getUsername());
-			LogUtils.E(dbUser.getUsername()+"==="+dbUser.getPassword());
+		//	LogUtils.E(dbUser.getUsername()+"==="+dbUser.getPassword());
 			return info;
 		}
 		

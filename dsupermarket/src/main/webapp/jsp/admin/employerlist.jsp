@@ -20,10 +20,21 @@
                 $(this).removeClass("mousehover");}); //移除该行的class
 	});
 	
-	
-		function showDialogForEdit(id){
-			window.showModalDialog('EmployerAction!updateEmployerDialog?employer.id='+id,'','dialogWidth=450px;dialogHeight=350px;');
+	// 发送post，进入编辑的action${path }/employer/toEditEmployer.action?eid=${emp.eid }
+	function toEditEmployer(empid){
+			var url = "${path }/employer/toEditEmployer.action";
+			var param = {"eid":empid};
+			$.post(url,param,function(data){
+				// 操作data，进行判断
+				if(data && data == "no"){
+					//操作失败
+				}else{
+					//操作成功
+				}
+			});
 	}
+	
+	
 	
 	</script>
 	</head>
@@ -31,16 +42,16 @@
 	<body>
 		<!-- 综合查询操作层 -->
 		<div id="selectDiv">
-			<s:form action="EmployerAction!emplyerList" theme="simple" target="mainFrame" >
-				<fieldset style="width:80%">
-					<legend>查询条件</legend>
-				姓名:<s:textfield name="employer.username" cssClass="textStyle"/>
-				家庭住址:<s:textfield name="employer.adress" cssClass="textStyle"/>
-				电话:<s:textfield name="employer.telephone" cssClass="textStyle"/>
-				月薪:&nbsp;从<s:textfield name="startMoney"  cssClass="textStyle"/>至<s:textfield name="endMoney" cssClass="textStyle" />
-				<s:submit value="查  询" cssClass="buStyle"/>
-				</fieldset>
-			</s:form>
+			<form action="${path }/employer/list.action" 
+				<fieldset><fieldset style="width:80%">
+					<legend>查询条件</legend></fieldset>
+			姓名:<input type="text" name="ename"  id="ename" />
+			住址:<input type="text" name="address"  id="address" />
+			电话:<input type="text" name="telephone"  id="telephone" />
+			月薪:<input type="text" name="monthpay"  id="monthpay" />
+			<input name="submit" type="submit" value="查	  询" />
+			>
+			</form>
 		</div>
 		<table class="ta">	
 			<tr bgcolor="#D6DFF7">
@@ -51,13 +62,13 @@
 				<th>电话</th>
 				<th>月薪</th>
 			</tr>
-			<c:forEach items="${sessionScope.list }" var="emp" varStatus="status">
+			<c:forEach items="${employerList }" var="emp" >
 				<tr bgColor="${status.index%2==0?'#e5fee2':'#d6fdd0' }">
-					<td><img src="${path }/images/edit2.png" alt="编辑" onclick="showDialogForEdit(${emp.id})"/></td>
-					<td><a style="border-width:0px" href="EmployerAction!deleteEmployer?employer.id=${emp.id }"><img src="${path }/images/delete.png" alt="删除"/></a></td>
-					<td>${emp.id }</td>
-					<td>${emp.username }</td>
-					<td>${emp.adress }</td>
+					<td><img src="${path }/images/edit2.png" alt="编辑" onclick="toEditEmployer(${emp.eid })"/></td>
+					<td><a style="border-width:0px"  onclick="return confirm('确定要删除吗?')"  href="${path }/employer/deleteEmployer.action?eid=${emp.eid }"><img src="${path }/images/delete.png" alt="删除"/></a></td>
+					<td>${emp.eid }</td>
+					<td>${emp.ename }</td>
+					<td>${emp.address }</td>
 					<td>${emp.telephone}</td>
 					<td>${emp.monthpay }</td>
 				</tr>

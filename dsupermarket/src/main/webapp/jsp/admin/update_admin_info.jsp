@@ -26,16 +26,16 @@
 	<body>
 		<center><font class="tabletop">修改管理员</font></center><br/><br/>
 		<!--<c:set var="stu" value="${sessionScope.stu_info }"/>-->
-		<form action="AdminAction!updateAdmin" target="_parent">
+		<form action="${path }/user/updateActionUser.action" target="_parent" method="post">
 		<table class="ta" width="200px">	
 		<tr >
 			<td>用户名</td>
-			<td><input type="text" name="admin.username" value="${session.admin_info.username }"/></td>
+			<td><input type="text" name="username" value="${currentUser.username }"/></td>
 		</tr>
 		<tr >
 			<td>密码</td>
-			<td><input type="password" name="admin.password" value="${session.admin_info.password }"/>
-			<input type="hidden" name="admin.id" value="${session.admin_info.id }"/>
+			<td><input type="password" name="password" value="${currentUser.password }"/>
+			<input type="hidden" name="uid" value="${currentUser.uid }"/>
 			</td>
 		</tr>
 		
