@@ -20,4 +20,6 @@ public interface EmployerService {
 
 	Employer findEmployerByEid(Integer eid);
 
+	void updateEmployerByEid(Employer employer);
+
 }

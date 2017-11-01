@@ -30,4 +30,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findEmployerByEid" parameterType="Integer" resultMap="EmployerResult">
 		select * from tb_employer where eid=#{eid}
 	</select>
+	<!-- 根据eid更新员工信息 -->
+	<update id="updateEmployerByEid" parameterType="Employer">
+		update tb_employer
+		<set>
+			<if test="ename!=null and ename!=''">
+				ename=#{ename},
+			</if>
+			<if test="address!=null and address!=''">
+				address=#{address},
+			</if>
+			<if test="telephone!=null and telephone!=''">
+				telephone=#{telephone},
+			</if>
+			<if test="monthpay!=null and monthpay!=''">
+				monthpay=#{monthpay},
+			</if>
+		</set>
+		<if test="eid!=null and eid!=''">
+			where eid=#{eid}
+		</if>
+	</update>
 </mapper>

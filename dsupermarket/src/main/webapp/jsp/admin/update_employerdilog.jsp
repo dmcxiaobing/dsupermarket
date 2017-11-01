@@ -26,29 +26,26 @@
 	<body>
 		<center><font class="tabletop">修改员工信息</font></center><br/><br/>
 		<!--<c:set var="stu" value="${sessionScope.stu_info }"/>-->
-		<form action="EmployerAction!updateEmployer" target="mainFrame" onsubmit="javascript:window.close();">
+		<form action="${path }/employer/updateEmployer.action" target="mainFrame"  method="post">
+		<input type="hidden" name="eid" value="${emp.eid}"/>
 		<table class="ta" width="200px">	
+		
 		<tr >
-			<td>用户名</td>
-			<td><input type="text" name="employer.username" value="${request.emp.username }"/></td>
-		</tr>
-		<tr >
-			<td>密码</td>
-			<td><input type="password" name="employer.password" value="${request.emp.password }"/>
-			<input type="hidden" name="employer.id" value="${request.emp.id }"/>
+			<td>姓名</td>
+			<td><input type="text" name="ename" value="${emp.ename }"/>
 			</td>
 		</tr>
 		<tr >
-			<td>家庭住址</td>
-			<td><input type="text" name="employer.adress" value="${request.emp.adress }"/></td>
+			<td>住址</td>
+			<td><input type="text" name="address" value="${emp.address }"/></td>
 		</tr>
 		<tr >
 			<td>电话</td>
-			<td><input type="text" name="employer.telephone" value="${request.emp.telephone }"/></td>
+			<td><input type="text" name="telephone" value="${emp.telephone }"/></td>
 		</tr>
 		<tr >
 			<td>月薪</td>
-			<td><input type="text" name="employer.monthpay" value="${request.emp.monthpay }"/></td>
+			<td><input type="text" name="monthpay" value="${emp.monthpay }"/></td>
 		</tr>
 		
 		<tr>

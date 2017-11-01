@@ -1,5 +1,6 @@
 package com.david.dsupermarket.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
  */
-public class User {
+public class User implements Serializable{
 	// 用户的uid
 	private Integer uid;
 	// 用户名

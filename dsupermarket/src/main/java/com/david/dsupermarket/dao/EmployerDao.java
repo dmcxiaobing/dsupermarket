@@ -36,4 +36,9 @@ public interface EmployerDao {
 	 */
 	Employer findEmployerByEid(Integer eid);
 
+	/**
+	 * 更新出员工信息，根据eid
+	 */
+	void updateEmployerByEid(Employer employer);
+
 }

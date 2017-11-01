@@ -64,7 +64,19 @@ public class EmployerController {
 			//根据员工id，查询出详情
 			Employer dbEmployer = emploerService.findEmployerByEid(employer.getEid());
 			model.addAttribute("emp",dbEmployer);
+			return "update_employerdilog";
 		}
-		return "update_employerdilog";
+		return "";
+	}
+	/**
+	 * 更新出员工信息，根据eid
+	 */
+	@RequestMapping("/updateEmployer")
+	public String updateEmployer(Employer employer,Model model) {
+		if (employer!=null && employer.getEid()!=null) {
+			//根据员工id，更新员工信息
+			emploerService.updateEmployerByEid(employer);
+		}
+		return list(model);
 	}
 }

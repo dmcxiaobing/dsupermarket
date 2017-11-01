@@ -26,10 +26,12 @@
 			var param = {"eid":empid};
 			$.post(url,param,function(data){
 				// 操作data，进行判断
-				if(data && data == "no"){
+				if(data && data == "error"){
 					//操作失败
-				}else{
-					//操作成功
+					
+				}else if(data && data == "success"){
+					//操作成功 转发到更新的jsp
+				
 				}
 			});
 	}
@@ -64,7 +66,8 @@
 			</tr>
 			<c:forEach items="${employerList }" var="emp" >
 				<tr bgColor="${status.index%2==0?'#e5fee2':'#d6fdd0' }">
-					<td><img src="${path }/images/edit2.png" alt="编辑" onclick="toEditEmployer(${emp.eid })"/></td>
+				<%-- 	<td><img src="${path }/images/edit2.png" alt="编辑" onclick="toEditEmployer(${emp.eid })"/></td> --%>
+					<td><a style="border-width:0px"   href="${path }/employer/toEditEmployer.action?eid=${emp.eid }"><img src="${path }/images/edit2.png" alt="编辑"/></a></td>
 					<td><a style="border-width:0px"  onclick="return confirm('确定要删除吗?')"  href="${path }/employer/deleteEmployer.action?eid=${emp.eid }"><img src="${path }/images/delete.png" alt="删除"/></a></td>
 					<td>${emp.eid }</td>
 					<td>${emp.ename }</td>

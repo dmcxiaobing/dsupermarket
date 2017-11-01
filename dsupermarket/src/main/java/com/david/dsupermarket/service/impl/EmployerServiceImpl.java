@@ -51,5 +51,12 @@ public class EmployerServiceImpl implements EmployerService{
 	public Employer findEmployerByEid(Integer eid) {
 		return employerDao.findEmployerByEid(eid);
 	}
+	/**
+	 * 更新出员工信息，根据eid
+	 */
+	@Override
+	public void updateEmployerByEid(Employer employer) {
+		employerDao.updateEmployerByEid(employer);
+	}
 
 }
