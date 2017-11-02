@@ -9,7 +9,12 @@ import java.io.Serializable;
  */
 public class Workday implements Serializable{
 
-	//id
+	//是否出勤的id
 	private Integer wid;
 	
+	private Employer employer;
+	//出勤的天数
+	private String workday;
+	
+	private Double addwork;
 }

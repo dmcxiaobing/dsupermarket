@@ -1,8 +1,10 @@
 package com.david.dsupermarket.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.david.dsupermarket.model.Employer;
+import com.david.dsupermarket.model.PageBean;
 
 /**
  * 员工的dao
@@ -40,5 +42,15 @@ public interface EmployerDao {
 	 * 更新出员工信息，根据eid
 	 */
 	void updateEmployerByEid(Employer employer);
+
+	/**
+	 * 分页查询所有员工 pageCode:当前页 pageSize:每页显示的总条数
+	 */
+	List<Employer>  findByPage(Map<String,Object> map);
+	/**
+	 * 
+	 * 查询出总记录数
+	 */
+	Integer count();
 
 }

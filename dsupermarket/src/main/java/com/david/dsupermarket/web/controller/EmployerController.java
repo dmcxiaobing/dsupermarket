@@ -1,16 +1,25 @@
 package com.david.dsupermarket.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.david.dsupermarket.constants.Constants;
 import com.david.dsupermarket.model.Employer;
+import com.david.dsupermarket.model.PageBean;
+import com.david.dsupermarket.model.PageModel;
 import com.david.dsupermarket.service.EmployerService;
 import com.david.dsupermarket.utils.LogUtils;
+import com.david.dsupermarket.utils.PageUtils;
+import com.david.dsupermarket.utils.UtilFuns;
 
 /**
  * 员工信息的控制器
@@ -34,6 +43,50 @@ public class EmployerController {
 		model.addAttribute("employerList",employerList);
 		return "employerlist";
 	}
+	
+	
+	/**
+	 * 分页查询所有员工
+	 * pageCode:当前页
+	 * pageSize:每页显示的总条数
+	 */
+	@RequestMapping("/findByPage")
+	public String findByPage(@RequestParam(value = "pageCode", required = false) String pageCode,
+			@RequestParam(value = "pageSize", required = false) String pageSize,Model model) {
+		LogUtils.E("pageCode"+pageCode+"pageSize="+pageSize);
+		/**
+		 * 设置分页的数据
+		 */
+		if (UtilFuns.isEmpty(pageCode) || UtilFuns.isEmpty(pageCode.trim())) {
+			pageCode = "1";
+		}
+		if (UtilFuns.isEmpty(pageSize) || UtilFuns.isEmpty(pageSize.trim())) {
+			pageSize = Constants.PAGE_SIZE + "";
+		}
+		PageModel pageModel = new PageModel(Integer.parseInt(pageCode), Integer.parseInt(pageSize));
+		Map<String, Object> map = new HashMap<String, Object>();
+		LogUtils.E("pageModel.getStart()"+pageModel.getStart());
+		map.put("start", pageModel.getStart());// 开始第几页，
+		map.put("size", pageModel.getPageSize());// 每页展示数量
+		// 分页查询数据
+		List<Employer> employerLists = emploerService.findfindByPage(map);
+		//设置返回的数据
+		PageBean<Employer> pageBean = new PageBean<>();
+		//查询出总记录数
+		Integer totalCountSize = emploerService.count();
+		//设置查询的数据
+		pageBean.setBeanList(employerLists);
+		//设置当前页
+		pageBean.setPageCode(pageModel.getPage());
+		//设置每页的记录数
+		pageBean.setPageSize(pageModel.getPageSize());
+		//设置总记录数
+		pageBean.setTotalCount(totalCountSize);
+		model.addAttribute("pageBean",pageBean);
+		System.out.println(pageBean);
+		return "employerlist";
+	}
+	
 	
 	
 	/**

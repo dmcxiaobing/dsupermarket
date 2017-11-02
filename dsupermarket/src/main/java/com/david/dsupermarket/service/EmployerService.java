@@ -1,8 +1,10 @@
 package com.david.dsupermarket.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.david.dsupermarket.model.Employer;
+import com.david.dsupermarket.model.PageBean;
 
 /**
  * 员工信息接口
@@ -21,5 +23,10 @@ public interface EmployerService {
 	Employer findEmployerByEid(Integer eid);
 
 	void updateEmployerByEid(Employer employer);
+
+
+	List<Employer> findfindByPage(Map<String,Object> map);
+
+	Integer count();
 
 }

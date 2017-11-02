@@ -1,6 +1,7 @@
 package com.david.dsupermarket.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.david.dsupermarket.dao.EmployerDao;
 import com.david.dsupermarket.model.Employer;
+import com.david.dsupermarket.model.PageBean;
 import com.david.dsupermarket.service.EmployerService;
 
 /**
@@ -45,7 +47,7 @@ public class EmployerServiceImpl implements EmployerService{
 		employerDao.deleteEmployer(eid);
 	}
 	/**
-	 * 根据员工id查找员工信息
+	 * 根据员工id查找员工信息·
 	 */
 	@Override
 	public Employer findEmployerByEid(Integer eid) {
@@ -57,6 +59,22 @@ public class EmployerServiceImpl implements EmployerService{
 	@Override
 	public void updateEmployerByEid(Employer employer) {
 		employerDao.updateEmployerByEid(employer);
+	}
+	/**
+	 * 分页查询所有员工
+	 * pageCode:当前页
+	 * pageSize:每页显示的总条数
+	 */
+	@Override
+	public List<Employer>  findfindByPage(Map<String,Object> map) {
+		return employerDao.findByPage(map);
+	}
+	/**
+	 * 查询出总记录数
+	 */
+	@Override
+	public Integer count() {
+		return employerDao.count();
 	}
 
 }

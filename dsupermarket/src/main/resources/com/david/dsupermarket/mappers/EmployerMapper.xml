@@ -51,4 +51,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where eid=#{eid}
 		</if>
 	</update>
+	<!-- 查询所有员工数量 -->
+	<select id="count" resultType="Integer">
+		select count(*) from tb_employer
+	</select>
+	<!-- 分页查询员工数据 -->
+	<select id="findByPage"  parameterType="Map" resultMap="EmployerResult">
+	select * from tb_employer
+		<where>
+			<if test="ename!=null and ename!=''">
+				and ename like #{ename}
+			</if>
+		</where>
+		<!-- 排序以及分页放在where之后 -->
+		<!-- order by releaseDate desc -->
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
 </mapper>

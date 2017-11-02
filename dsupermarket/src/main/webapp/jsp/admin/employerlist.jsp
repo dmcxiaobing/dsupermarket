@@ -1,15 +1,17 @@
-<%@ page language="java" contentType="text/html;charset=utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page language="java" contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
-	<head><title></title>
-	<c:set var="path" value="${pageContext.request.contextPath }"/>
-	<link rel="stylesheet" href="${path }/css/general.css"/>
-	<link rel="stylesheet" href="${path }/css/jquery-ui-1.8.20.custom.css"/>
-	<script type="text/javascript" src="${path }/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="${path }/js/jquery-ui-1.8.20.custom.min.js"></script>
-	<script type="text/javascript">
+<head>
+<title></title>
+<c:set var="path" value="${pageContext.request.contextPath }" />
+<link rel="stylesheet" href="${path }/css/general.css" />
+<link rel="stylesheet" href="${path }/css/jquery-ui-1.8.20.custom.css" />
+<script type="text/javascript" src="${path }/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript"
+	src="${path }/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript">
 	$(function() {
 		$(".ta tr").each(function(i) {
 			this.style.backgroundColor = [ '#799AE1', '#D6DFF7' ][i % 2]
@@ -36,26 +38,31 @@
 			});
 	}
 	
-	
-	
 	</script>
-	</head>
-	<center>
+	<SCRIPT language=javascript>
+	// 提交分页的查询的表单
+	function to_page(pageCode){
+		if(pageCode){
+			$("#pageCode").val(pageCode);
+		}
+		document.formFindByPage.submit();
+	}
+</SCRIPT>
+</head>
+<center>
 	<body>
 		<!-- 综合查询操作层 -->
 		<div id="selectDiv">
-			<form action="${path }/employer/list.action" 
+			<form id="formFindByPageForm" name="formFindByPageForm" action="${path }/employer/findByPage.action"
 				<fieldset><fieldset style="width:80%">
 					<legend>查询条件</legend></fieldset>
-			姓名:<input type="text" name="ename"  id="ename" />
-			住址:<input type="text" name="address"  id="address" />
-			电话:<input type="text" name="telephone"  id="telephone" />
-			月薪:<input type="text" name="monthpay"  id="monthpay" />
-			<input name="submit" type="submit" value="查	  询" />
-			>
-			</form>
+				姓名: <input type="text" name="ename"  id="ename" /> 住址:
+				<input type="text" name="address"  id="address" /> 电话:
+				<input type="text" name="telephone"  id="telephone" /> 月薪:
+				<input type="text" name="monthpay"  id="monthpay" />
+				<input name="submit" type="submit" value="查	  询" />></form>
 		</div>
-		<table class="ta">	
+		<table class="ta">
 			<tr bgcolor="#D6DFF7">
 				<th colspan="2">操作</th>
 				<th>编号</th>
@@ -64,49 +71,72 @@
 				<th>电话</th>
 				<th>月薪</th>
 			</tr>
-			<c:forEach items="${employerList }" var="emp" >
+			<c:forEach items="${pageBean.beanList }" var="emp">
 				<tr bgColor="${status.index%2==0?'#e5fee2':'#d6fdd0' }">
-				<%-- 	<td><img src="${path }/images/edit2.png" alt="编辑" onclick="toEditEmployer(${emp.eid })"/></td> --%>
-					<td><a style="border-width:0px"   href="${path }/employer/toEditEmployer.action?eid=${emp.eid }"><img src="${path }/images/edit2.png" alt="编辑"/></a></td>
-					<td><a style="border-width:0px"  onclick="return confirm('确定要删除吗?')"  href="${path }/employer/deleteEmployer.action?eid=${emp.eid }"><img src="${path }/images/delete.png" alt="删除"/></a></td>
+					<%-- 	<td><img src="${path }/images/edit2.png" alt="编辑" onclick="toEditEmployer(${emp.eid })"/></td> --%>
+					<td><a style="border-width: 0px"
+						href="${path }/employer/toEditEmployer.action?eid=${emp.eid }"><img
+							src="${path }/images/edit2.png" alt="编辑" /></a></td>
+					<td><a style="border-width: 0px"
+						onclick="return confirm('确定要删除吗?')"
+						href="${path }/employer/deleteEmployer.action?eid=${emp.eid }"><img
+							src="${path }/images/delete.png" alt="删除" /></a></td>
 					<td>${emp.eid }</td>
 					<td>${emp.ename }</td>
 					<td>${emp.address }</td>
 					<td>${emp.telephone}</td>
 					<td>${emp.monthpay }</td>
 				</tr>
-			</c:forEach>		
+			</c:forEach>
 		</table>
-		<br/>
+		<br />
 		<center>
-		<div id="pageDir">
-			 	<c:set var="pageCount" value="${(sessionScope.count-1)/10+1 }"/>
-				<fmt:formatNumber var="lastIndex" value="${pageCount}" pattern="#"/>
-			<ul>
-				<li style="margin-left:25%;">
-					第${sessionScope.thisindex }/${lastIndex }页
-				</li>
-				<li style="margin-left:40px;">
-						<a href="EmployerAction!emplyerList?index=1" target="mainFrame">首页</a>
-						
-						<!-- 
-							<c:set var="pageCount" value="${fn:length(userList)%10==0?fn:length(userList)/10:fn:length(userList)/10+1 }"/>
-						-->
-						
-						 	<c:forEach var="i"  begin="1" step="1" end="${lastIndex }">
-								<a href="EmployerAction!emplyerList?index=${i } " target="mainFrame"><c:out value="${i }"/></a>
-							</c:forEach>
-						<a href="EmployerAction?index=${lastIndex}" target="mainFrame">尾页</a>
-				</li>
-				 <li style="margin-left:40px;">
-						<s:form action="EmployerAction!emplyerList" theme="simple" target="mainFrame">
-							第<s:textfield  name="index" cssStyle="width:25px;height:20px;"/>页
-							<s:submit value="Go" id="go"/>
-						</s:form>
-				</li>
-			</ul>
-		</div>
+		<FORM id="formFindByPage" name="formFindByPage" action="${path }/employer/findByPage.action" method=post>
+			<div id="pageDir">
+					<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+						<TBODY>
+							<TR>
+								<TD><SPAN id=pagelink>
+										<DIV
+											style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
+											共[<B>${pageBean.totalCount}</B>]条记录，共[<B>${pageBean.totalPage}</B>]页
+											,每页显示 <select name="pageSize">
+												<option value="2"
+													<c:if test="${pageBean.pageSize==2 }">selected</c:if>>2</option>
+												<option value="3"
+													<c:if test="${pageBean.pageSize==3 }">selected</c:if>>3</option>
+											</select> 条
+
+											<c:if test="${ pageBean.pageCode > 1 }">
+													[<A href="javascript:to_page(${pageBean.pageCode-1})">前一页</A>]
+												</c:if>
+
+											<B>当前是第[${pageBean.pageCode}]页</B>
+
+											<c:if test="${ pageBean.pageCode < pageBean.totalPage }">
+													[<A href="javascript:to_page(${pageBean.pageCode+1})">后一页</A>] 
+												</c:if>
+
+											到 <input type="text" size="3" id="pageCode" name="pageCode" /> 页
+
+											<input type="button" value="Go" onclick="to_page()" />
+										</DIV>
+								</SPAN></TD>
+							</TR>
+						</TBODY>
+					</TABLE>
+					</TD>
+					<TD width=15
+						background="${pageContext.request.contextPath }/images/new_023.jpg"><IMG
+						src="${pageContext.request.contextPath }/images/new_023.jpg"
+						border=0></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+			</div>
+		</FORM>
+		
 		</center>
 	</body>
-	</center>
+</center>
 </html>

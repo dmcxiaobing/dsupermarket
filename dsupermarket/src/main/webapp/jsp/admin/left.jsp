@@ -138,7 +138,7 @@ response.setCharacterEncoding("utf-8");
                   <TBODY>
                    
                     <TR>
-                      <TD height=20><a href="${pageContext.request.contextPath}/employer/list.action" target="mainFrame">员工列表</a></TD>
+                      <TD height=20><a href="${pageContext.request.contextPath}/employer/findByPage.action" target="mainFrame">员工列表</a></TD>
                     </TR>
                     <TR>
                       <TD height=20><a href="add_employer.jsp" target="mainFrame">添加员工</a></TD>

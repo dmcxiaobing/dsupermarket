@@ -14,4 +14,6 @@ public class Constants {
 	public static final String REDIRECT_LOGIN_JSP_PATH = "redirect:/login.jsp";
 	/*检测用户名是否存在*/
 	public static final String CHECK_USERNAME_IS_EXISTS = "用户名已经存在了。请更换！";
+	/* 分页每页显示的总数量 */
+	public static final int PAGE_SIZE = 2;
 }
