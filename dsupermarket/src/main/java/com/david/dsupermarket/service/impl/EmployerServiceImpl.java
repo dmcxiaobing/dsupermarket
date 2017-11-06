@@ -76,5 +76,12 @@ public class EmployerServiceImpl implements EmployerService{
 	public Integer count() {
 		return employerDao.count();
 	}
+	/**
+	 * 带有请求参数的查询总记录数
+	 */
+	@Override
+	public Integer countMapSize(Map<String, Object> map) {
+		return employerDao.countMapSize(map);
+	}
 
 }

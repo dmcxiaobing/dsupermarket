@@ -52,8 +52,9 @@ public class EmployerController {
 	 */
 	@RequestMapping("/findByPage")
 	public String findByPage(@RequestParam(value = "pageCode", required = false) String pageCode,
-			@RequestParam(value = "pageSize", required = false) String pageSize,Model model) {
+			@RequestParam(value = "pageSize", required = false) String pageSize,Model model,Employer employer) {
 		LogUtils.E("pageCode"+pageCode+"pageSize="+pageSize);
+		LogUtils.E(employer+"");
 		/**
 		 * 设置分页的数据
 		 */
@@ -68,12 +69,27 @@ public class EmployerController {
 		LogUtils.E("pageModel.getStart()"+pageModel.getStart());
 		map.put("start", pageModel.getStart());// 开始第几页，
 		map.put("size", pageModel.getPageSize());// 每页展示数量
+		if (employer!=null) {
+			if (employer.getEname()!=null&&!employer.getEname().equals("")) {
+				map.put("ename", employer.getEname());
+			}
+			if (employer.getAddress()!=null&&!employer.getAddress().equals("")) {
+				map.put("address", employer.getAddress());
+			}
+			if (employer.getTelephone()!=null&&!employer.getTelephone().equals("")) {
+				map.put("telephone", employer.getTelephone());
+			}
+			if (employer.getMonthpay()!=null) {
+				map.put("monthpay", employer.getMonthpay()+"");
+			}
+		}
 		// 分页查询数据
 		List<Employer> employerLists = emploerService.findfindByPage(map);
 		//设置返回的数据
 		PageBean<Employer> pageBean = new PageBean<>();
 		//查询出总记录数
-		Integer totalCountSize = emploerService.count();
+		//Integer totalCountSize = emploerService.count();
+		Integer totalCountSize = emploerService.countMapSize(map);
 		//设置查询的数据
 		pageBean.setBeanList(employerLists);
 		//设置当前页
@@ -83,6 +99,7 @@ public class EmployerController {
 		//设置总记录数
 		pageBean.setTotalCount(totalCountSize);
 		model.addAttribute("pageBean",pageBean);
+		model.addAttribute("employer",employer);
 		System.out.println(pageBean);
 		return "employerlist";
 	}
@@ -105,7 +122,8 @@ public class EmployerController {
 	@RequestMapping("/addEmployer")
 	public String addEmployer(Employer employer,Model model) {
 		emploerService.addEmployer(employer);
-		return list(model);
+		//return list(model);
+		return findByPage(null, null, model, null);
 	}
 	
 	/**

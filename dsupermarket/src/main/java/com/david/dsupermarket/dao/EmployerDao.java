@@ -46,11 +46,17 @@ public interface EmployerDao {
 	/**
 	 * 分页查询所有员工 pageCode:当前页 pageSize:每页显示的总条数
 	 */
-	List<Employer>  findByPage(Map<String,Object> map);
+	List<Employer> findByPage(Map<String, Object> map);
+
 	/**
 	 * 
 	 * 查询出总记录数
 	 */
 	Integer count();
+
+	/**
+	 * 带有请求参数的查询总记录数
+	 */
+	Integer countMapSize(Map<String, Object> map);
 
 }

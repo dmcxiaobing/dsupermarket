@@ -53,14 +53,14 @@
 	<body>
 		<!-- 综合查询操作层 -->
 		<div id="selectDiv">
-			<form id="formFindByPageForm" name="formFindByPageForm" action="${path }/employer/findByPage.action"
+			<form id="formFindByPageForm" name="formFindByPageForm" action="${path }/employer/findByPage.action">
 				<fieldset><fieldset style="width:80%">
 					<legend>查询条件</legend></fieldset>
-				姓名: <input type="text" name="ename"  id="ename" /> 住址:
-				<input type="text" name="address"  id="address" /> 电话:
-				<input type="text" name="telephone"  id="telephone" /> 月薪:
-				<input type="text" name="monthpay"  id="monthpay" />
-				<input name="submit" type="submit" value="查	  询" />></form>
+				姓名: <input type="text" name="ename"  id="ename" value="${employer.ename }"/> 住址:
+				<input type="text" name="address"  id="address" value="${employer.address }"/> 电话:
+				<input type="text" name="telephone"  id="telephone" value="${employer.telephone }"/> 月薪:
+				<input type="text" name="monthpay"  id="monthpay" value="${employer.monthpay }"/>
+				<input name="submit" type="submit" value="查	  询" /></form>
 		</div>
 		<table class="ta">
 			<tr bgcolor="#D6DFF7">
@@ -92,6 +92,11 @@
 		<br />
 		<center>
 		<FORM id="formFindByPage" name="formFindByPage" action="${path }/employer/findByPage.action" method=post>
+				<input type="hidden" name="ename"  id="ename" value="${employer.ename }"/> 
+				<input type="hidden" name="address"  id="address"  value="${employer.address }" /> 
+				<input type="hidden" name="telephone"  id="telephone" value="${employer.telephone }" /> 
+				<input type="hidden" name="monthpay"  id="monthpay"  value="${employer.monthpay }"  />
+			
 			<div id="pageDir">
 					<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 						<TBODY>

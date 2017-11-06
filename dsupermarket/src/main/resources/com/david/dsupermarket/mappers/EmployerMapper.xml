@@ -16,18 +16,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="Employer">
 		select * from tb_employer
 	</select>
-		<!-- 插入员工 -->
+	<!-- 插入员工 -->
 	<insert id="addEmployer" parameterType="Employer">
 		insert into tb_employer
 		values(null,#{ename},#{address},#{telephone},#{monthpay})
 	</insert>
-	
+
 	<!-- 删除员工 -->
 	<delete id="deleteEmployer" parameterType="Integer">
-		delete  from tb_employer where eid=#{eid}
+		delete from
+		tb_employer where eid=#{eid}
 	</delete>
 	<!-- 根据员工id查找员工信息 -->
-	<select id="findEmployerByEid" parameterType="Integer" resultMap="EmployerResult">
+	<select id="findEmployerByEid" parameterType="Integer"
+		resultMap="EmployerResult">
 		select * from tb_employer where eid=#{eid}
 	</select>
 	<!-- 根据eid更新员工信息 -->
@@ -55,12 +57,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="count" resultType="Integer">
 		select count(*) from tb_employer
 	</select>
-	<!-- 分页查询员工数据 -->
-	<select id="findByPage"  parameterType="Map" resultMap="EmployerResult">
-	select * from tb_employer
+	<!--带有请求参数的查询总记录数 -->
+	<select id="countMapSize" resultType="Integer" parameterType="Map">
+		select count(*) from tb_employer
 		<where>
 			<if test="ename!=null and ename!=''">
 				and ename like #{ename}
+			</if>
+			<if test="address!=null and address!=''">
+				and address like #{address}
+			</if>
+			<if test="telephone!=null and telephone!=''">
+				and telephone like #{telephone}
+			</if>
+			<if test="monthpay!=null">
+				and monthpay like #{monthpay}
+			</if>
+		</where>
+	</select>
+	<!-- 分页查询员工数据 -->
+	<select id="findByPage" parameterType="Map" resultMap="EmployerResult">
+		select * from tb_employer
+		<where>
+			<if test="ename!=null and ename!=''">
+				and ename like #{ename}
+			</if>
+			<if test="address!=null and address!=''">
+				and address like #{address}
+			</if>
+			<if test="telephone!=null and telephone!=''">
+				and telephone like #{telephone}
+			</if>
+			<if test="monthpay!=null">
+				and monthpay like #{monthpay}
 			</if>
 		</where>
 		<!-- 排序以及分页放在where之后 -->

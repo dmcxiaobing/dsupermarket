@@ -29,4 +29,6 @@ public interface EmployerService {
 
 	Integer count();
 
+	Integer countMapSize(Map<String, Object> map);
+
 }
